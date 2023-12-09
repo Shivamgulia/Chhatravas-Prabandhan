@@ -1,0 +1,22 @@
+.cont {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(auto-fit, 42px);
+  background-color: #014f86;
+  padding-top: 10px;
+}
+
+.link {
+  height: 40px;
+  display: flex;
+  padding-left: 5px;
+  justify-content: left;
+  font-size: 30px;
+  color: #61a5c2;
+  transition: 0.5s all;
+}
+
+.link:hover {
+  background-color: #a9d6e5;
+  color: #40819c;
+}

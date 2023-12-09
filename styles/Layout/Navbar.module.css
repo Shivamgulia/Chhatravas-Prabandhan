@@ -1,0 +1,27 @@
+.mainNav {
+  display: grid;
+  grid-template-columns: 80vw 10vw;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fec5bb;
+}
+
+.logo {
+  display: flex;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 40px;
+  color: #580c1f;
+  margin-left: 20px;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  justify-content: right;
+  height: 10vh;
+}
+
+.profile > img {
+  height: 10vh;
+  width: fit-content;
+}

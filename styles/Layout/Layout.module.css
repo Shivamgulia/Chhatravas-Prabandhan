@@ -1,0 +1,12 @@
+.cont {
+  display: grid;
+  min-width: 100vh;
+  grid-template-rows: 10vh 90vh;
+  color: black;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 15vw 85vw;
+  color: white;
+}

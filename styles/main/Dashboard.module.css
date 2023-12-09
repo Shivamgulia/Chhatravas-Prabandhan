@@ -1,0 +1,83 @@
+.cont {
+}
+
+.head {
+  padding: 20px 0px 0px 20px;
+  color: black;
+}
+
+.body {
+  display: grid;
+  padding-top: 20px;
+  grid-template-columns: 85vw;
+  min-height: 80vh;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  color: black;
+}
+
+.noticeboard {
+  display: grid;
+  grid-template-columns: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: center;
+  align-items: center;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.noticehead {
+  display: grid;
+  padding: 10px;
+  padding-left: 20px;
+  grid-template-columns: 100%;
+  background-color: #ff9f1c;
+}
+
+.noticelist {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 100%;
+  padding-top: 5px;
+  background-color: #ff9770;
+}
+
+.notice {
+  display: grid;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding: 4px;
+  background-color: #ff9770;
+  border-top: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+.emergency {
+  display: grid;
+  grid-template-columns: 70%;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.emergencyhead {
+  color: Red;
+  display: grid;
+}
+
+.emergencylist {
+  display: flex;
+  color: red;
+  justify-content: space-around;
+}
+
+.emergencyitem {
+  display: grid;
+}
