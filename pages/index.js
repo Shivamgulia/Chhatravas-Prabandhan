@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout/Layout';
 import Dashboard from '../components/main/Dashboard';
@@ -10,6 +13,16 @@ import styles from '../styles/Index.module.css';
 const inter = Commissioner({ subsets: ['latin'] });
 
 export default function Home() {
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(session);
+    if (session.status === 'unauthenticated') {
+      router.push('/login');
+    }
+  }, [session]);
+
   return (
     <>
       <Head>

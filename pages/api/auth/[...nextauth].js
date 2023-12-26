@@ -15,11 +15,30 @@ const authOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const user = { id: '1', name: 'J Smith', email: 'jsmith@example.com' };
-
         // authenticate if user
+        console.log(credentials.email + credentials.password);
 
-        throw Error('Invalid');
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          }
+        );
+
+        const data = await response.json();
+        console.log(data);
+
+        if (!response.ok) {
+          throw Error('Invalid');
+        }
+        return data;
       },
     }),
   ],

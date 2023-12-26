@@ -15,14 +15,7 @@ export default function Login() {
 
   useEffect(() => {
     if (session.status === 'authenticated') {
-      if (
-        session.data.user.roles[session.data.user.roles.length - 1]
-          .authority === 'ROLE_ADMIN'
-      ) {
-        router.push('/');
-      } else {
-        router.push('/schoolselect');
-      }
+      // router.push('/');
     }
   }, [session]);
 
@@ -43,47 +36,56 @@ export default function Login() {
   }
 
   return (
-    <div className={styles.loginCont}>
-      <h1>Login</h1>
-      <form action='' className={styles.loginForm} onSubmit={onSubmit}>
-        <div className={styles.formInput}>
-          <label htmlFor='uname'> User Name</label>
-          <input
-            ref={uNameRef}
-            type='text'
-            name='uname'
-            id='uname'
-            placeholder='User Name'
-            required
-          />
-        </div>
+    <div className={`$${styles.cont}`}>
+      <div className={styles.loginCont}>
+        <h1>Login</h1>
+        <form action='' className={styles.loginForm} onSubmit={onSubmit}>
+          <div className={styles.formInput}>
+            <label htmlFor='uname' className={styles.label}>
+              {' '}
+              User Name
+            </label>
+            <input
+              ref={uNameRef}
+              type='text'
+              name='uname'
+              id='uname'
+              placeholder='User Name'
+              required
+              className={styles.input}
+            />
+          </div>
 
-        <div className={styles.formInput}>
-          <label htmlFor='pass'>Passwords</label>
-          <input
-            ref={passwordRef}
-            type={showPassword ? 'text' : 'password'}
-            name='pass'
-            id='pass'
-            placeholder='Password'
-            required
-          />
-        </div>
-        <div style={{ display: 'flex', alignContent: 'center' }}>
-          <input
-            type='checkbox'
-            id='showP'
-            onClick={() => {
-              setShowPassword(!showPassword);
-            }}
-          />
-          <label htmlFor='showP'>Show Password</label>
-        </div>
-        <div className={styles.error}>
-          {error && <h5>Invalid Credentials</h5>}
-        </div>
-        <button className={styles.button83}>Login</button>
-      </form>
+          <div className={styles.formInput}>
+            <label htmlFor='pass' className={styles.label}>
+              Passwords
+            </label>
+            <input
+              className={styles.input}
+              ref={passwordRef}
+              type={showPassword ? 'text' : 'password'}
+              name='pass'
+              id='pass'
+              placeholder='Password'
+              required
+            />
+          </div>
+          <div style={{ display: 'flex', alignContent: 'center' }}>
+            <input
+              type='checkbox'
+              id='showP'
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            />
+            <label htmlFor='showP'>Show Password</label>
+          </div>
+          <div className={styles.error}>
+            {error && <h5>Invalid Credentials</h5>}
+          </div>
+          <button className={styles.button83}>Login</button>
+        </form>
+      </div>
     </div>
   );
 }
