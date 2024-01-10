@@ -2,86 +2,88 @@
   display: grid;
   min-height: 100vh;
   place-items: center;
+  background-color: #e0e1dd;
 }
 
 .loginCont {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: grid;
+  place-items: center;
+  background-color: #1b263b;
+  grid-template-columns: 40vw;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  gap: 2rem;
+  border-radius: 2rem 0 2rem 0;
+}
+
+.loginCont > h1 {
+  color: #778da9;
 }
 
 .loginForm {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 100%;
+  gap: 1rem;
 }
 
 .formInput {
-  margin-bottom: 15px;
+  display: grid;
+  place-items: left;
+  gap: 0.2rem;
 }
 
 .label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
+  text-align: left;
 }
 
 .input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  border-style: none none solid none;
+  background-color: inherit;
+  border-radius: 0 0 0 0;
+  padding: 0.5rem;
+  color: white;
 }
 
-/* Checkbox styling */
-#showP {
-  margin-right: 5px;
+.input:focus {
+  outline: none;
+  border-color: #ffffff;
+  transition: all 3s;
+  animation: glow 3s infinite alternate-reverse;
+  /* box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px; */
 }
 
-/* Error message styling */
 .error {
-  color: #ff0000;
-  margin-bottom: 15px;
+  color: red;
 }
 
-.button83 {
-  background-color: #4caf50;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+.showPasswordDiv {
+  display: flex;
+  gap: 0.2rem;
 }
 
-/* Optional: Style for the "Show Password" label */
-#showP + label {
-  margin-left: 5px;
-  color: #333;
-  cursor: pointer;
+.passCheck {
 }
 
-/* Responsive styles */
-@media only screen and (max-width: 600px) {
-  .loginCont {
-    max-width: 100%;
-    padding: 10px;
-  }
+.loginButton {
+  background-color: #3f88c5;
+  padding: 7px 40px;
+  border-style: none;
+}
 
-  .formInput {
-    margin-bottom: 10px;
-  }
+.loginButton:hover {
+  transition: all 3s;
+  animation: glow 3s infinite alternate-reverse;
+}
 
-  .input {
-    padding: 6px;
-    font-size: 12px;
+@keyframes glow {
+  25% {
+    box-shadow: rgba(255, 255, 255, 0.16) 0px 1px 4px;
   }
-
-  .button83 {
-    font-size: 14px;
+  60% {
+    box-shadow: rgba(255, 255, 255, 0.24) 0px 3px 8px;
+  }
+  100% {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
   }
 }

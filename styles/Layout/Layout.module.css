@@ -3,6 +3,7 @@
   min-width: 100vh;
   grid-template-rows: 10vh 90vh;
   color: black;
+  background-color: white;
 }
 
 .body {

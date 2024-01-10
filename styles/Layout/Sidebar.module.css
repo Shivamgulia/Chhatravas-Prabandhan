@@ -14,6 +14,7 @@
   font-size: 30px;
   color: #61a5c2;
   transition: 0.5s all;
+  overflow: hidden;
 }
 
 .link:hover {

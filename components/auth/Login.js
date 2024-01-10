@@ -15,7 +15,7 @@ export default function Login() {
 
   useEffect(() => {
     if (session.status === 'authenticated') {
-      // router.push('/');
+      router.push('/');
     }
   }, [session]);
 
@@ -36,10 +36,13 @@ export default function Login() {
   }
 
   return (
-    <div className={`$${styles.cont}`}>
+    <div className={`${styles.cont}`}>
       <div className={styles.loginCont}>
         <h1>Login</h1>
         <form action='' className={styles.loginForm} onSubmit={onSubmit}>
+          <div className={`${styles.error}`}>
+            {error && <h4>Invalid Credentials</h4>}
+          </div>
           <div className={styles.formInput}>
             <label htmlFor='uname' className={styles.label}>
               {' '}
@@ -50,7 +53,7 @@ export default function Login() {
               type='text'
               name='uname'
               id='uname'
-              placeholder='User Name'
+              placeholder='Jhon@gmail.com'
               required
               className={styles.input}
             />
@@ -66,24 +69,23 @@ export default function Login() {
               type={showPassword ? 'text' : 'password'}
               name='pass'
               id='pass'
-              placeholder='Password'
+              placeholder='XXXXXXXXXXX'
               required
             />
           </div>
-          <div style={{ display: 'flex', alignContent: 'center' }}>
+          <div className={`${styles.showPasswordDiv}`}>
             <input
               type='checkbox'
               id='showP'
               onClick={() => {
                 setShowPassword(!showPassword);
               }}
+              className={`${styles.passCheck}`}
             />
             <label htmlFor='showP'>Show Password</label>
           </div>
-          <div className={styles.error}>
-            {error && <h5>Invalid Credentials</h5>}
-          </div>
-          <button className={styles.button83}>Login</button>
+
+          <button className={styles.loginButton}>Login</button>
         </form>
       </div>
     </div>

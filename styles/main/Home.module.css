@@ -1,0 +1,22 @@
+.cont {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  gap: 2rem;
+  color: black;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.5rem;
+}
+
+.passButton {
+  display: grid;
+  place-items: center;
+  padding: 10px 30px;
+  gap: 2rem;
+  border-style: none;
+  background-color: #e29578;
+}

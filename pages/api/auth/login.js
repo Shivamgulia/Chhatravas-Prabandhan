@@ -12,9 +12,6 @@ export default async function handler(req, res) {
 
   const { email, password } = req.body;
 
-  console.log(email);
-  console.log(password);
-
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
@@ -47,7 +44,9 @@ export default async function handler(req, res) {
 
     await connection.end();
 
-    res.status(200).json({ token });
+    user.password = undefined;
+
+    res.status(200).json({ user, token });
   } catch (error) {
     console.error('MySQL error:', error);
     res.status(500).json({ message: 'Internal Server Error' });
