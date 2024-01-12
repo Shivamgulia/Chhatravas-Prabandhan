@@ -12,13 +12,15 @@ function Sidebar() {
       <Link href={'/'}>
         <div className={`${styles.link}`}>Dashboard</div>
       </Link>
-      <div className={`${styles.link}`}>Student details</div>
-      <div className={`${styles.link}`}>Room management</div>
-      <div className={`${styles.link}`}>Fee management</div>
-      <div className={`${styles.link}`}>Warden Staff details</div>
-      <div className={`${styles.link}`}>Complains and Re...</div>
-      <div className={`${styles.link}`}>Mess updates</div>
-      <div className={`${styles.link}`}>Inventory management</div>
+      <Link href={'/warden'}>
+        <div className={`${styles.link}`}>Warden Dashboard</div>
+      </Link>
+      <Link href={'/maintainance'}>
+        <div className={`${styles.link}`}>Maintainance</div>
+      </Link>
+      <Link href={'/employee'}>
+        <div className={`${styles.link}`}>Employees</div>
+      </Link>
     </div>
   );
 }

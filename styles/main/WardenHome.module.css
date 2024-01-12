@@ -1,0 +1,18 @@
+.cont {
+  display: grid;
+  place-items: center;
+  color: black;
+  padding-top: 20px;
+  gap: 2rem;
+}
+
+.list {
+  display: grid;
+  place-items: left;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.item {
+  font-size: 20px;
+}
