@@ -1,8 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import verifyToken from '@/components/jwt/verifyToken';
+import mysql from 'mysql2/promise';
 
-export default function handler(req, res) {
+import verifyToken from '@/components/jwt/verifyToken';
+import dbConfig from '@/assets/database/db';
+
+export default async function handler(req, res) {
   const token = req.headers.authorization;
+
+  console.log(token);
 
   const decodedToken = verifyToken(token);
 
@@ -10,5 +15,28 @@ export default function handler(req, res) {
     return res.status(401).json({ message: 'Unauthorized - Invalid token' });
   }
 
-  res.status(200).json({ name: 'John Doe' });
+  const rows = 10;
+  const page = req.body.page;
+  const hostel = req.body.hostel;
+
+  const offset = (page - 1) * rows;
+
+  if (!hostel) {
+    return res.status(400).json({ message: 'Hostel parameter is required' });
+  }
+
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+
+    const query = `SELECT * FROM employee WHERE hostel = "${hostel}" LIMIT ${rows} OFFSET ${offset}`;
+
+    const [students] = await connection.execute(query);
+
+    await connection.end();
+
+    res.status(200).json({ students });
+  } catch (error) {
+    console.error('MySQL error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 }
