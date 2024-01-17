@@ -16,7 +16,7 @@ const authOptions = {
       },
       async authorize(credentials, req) {
         // authenticate if user
-        console.log(credentials.email + credentials.password);
+        // console.log(credentials.email + credentials.password);
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
@@ -33,7 +33,7 @@ const authOptions = {
         );
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         if (!response.ok) {
           throw Error('Invalid');
