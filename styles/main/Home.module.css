@@ -20,3 +20,55 @@
   border-style: none;
   background-color: #e29578;
 }
+
+.form {
+  display: grid;
+  grid-template-columns: 20vw;
+  gap: 0.5rem;
+}
+
+.passdiv {
+  display: grid;
+  grid-template-columns: 17vw 3.5vw;
+  gap: 0.5vw;
+}
+
+.input {
+  display: grid;
+  place-items: center;
+  padding: 10px 30px;
+  gap: 2rem;
+  border-style: none;
+  background-color: var(--secondary-color);
+  text-align: center;
+}
+
+.showPass {
+  border-style: none;
+  background-color: inherit;
+  color: black;
+  position: fixed;
+  translate: calc(15vw - 106%);
+  font-size: 35px;
+}
+
+.error {
+  font-size: 35px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.submitButton {
+  background-color: var(--base-color);
+  border-style: none;
+  padding: 1rem 0.3rem;
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: bolder;
+}

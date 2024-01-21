@@ -1,6 +1,8 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 
+import styles from '@/styles/main/Warden/StudentList.module.css';
+
 function StudentList() {
   const session = useSession();
 
@@ -38,30 +40,50 @@ function StudentList() {
   }
 
   return (
-    <div>
-      <ul>
+    <div className={`${styles.cont}`}>
+      <table className={`${styles.list}`}>
+        <thead>
+          <tr className={`${styles.headings}`}>
+            <th className={`${styles.head}`}>Name</th>
+            <th className={`${styles.head}`}>Roll No.</th>
+            <th className={`${styles.head}`}>Father Name</th>
+            <th className={`${styles.head}`}>Branch</th>
+            <th className={`${styles.head}`}>Room No</th>
+          </tr>
+        </thead>
+        {/* <tbody> */}
         {students.map((item) => {
+          console.log(item);
           return (
-            <li key={item.id} style={{ color: 'black' }}>
-              {item.name}
-            </li>
+            <tr key={item.id} className={`${styles.item}`}>
+              <td>{item.name}</td>
+              <td>{item.rollno}</td>
+              <td>{item.fathername}</td>
+              <td>{item.branch}</td>
+              <td>{item.roomno}</td>
+            </tr>
           );
         })}
-      </ul>
-      <button
-        onClick={() => {
-          setPage(page + 1);
-        }}
-      >
-        next
-      </button>
-      <button
-        onClick={() => {
-          if (page > 1) setPage(page - 1);
-        }}
-      >
-        prev
-      </button>
+        {/* </tbody> */}
+      </table>
+      <div className={`${styles.btns}`}>
+        <button
+          onClick={() => {
+            if (page > 1) setPage(page - 1);
+          }}
+          className={`${styles.btn}`}
+        >
+          prev
+        </button>
+        <button
+          onClick={() => {
+            setPage(page + 1);
+          }}
+          className={`${styles.btn}`}
+        >
+          next
+        </button>
+      </div>
     </div>
   );
 }

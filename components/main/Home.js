@@ -1,8 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaCheck, FaSkullCrossbones } from 'react-icons/fa6';
+import { IoIosEyeOff, IoIosEye } from 'react-icons/io';
 
 import styles from '../../styles/main/Home.module.css';
 
 function Home({ user }) {
+  const [showPass, setShowPass] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [formError, setFormError] = useState({
+    newPassword: true,
+    confirmPassword: true,
+  });
+  const [form, setForm] = useState({
+    newPassword: '',
+    confirmPassword: '',
+  });
+
+  function updateForm(event) {
+    setForm((prev) => {
+      return { ...prev, [event.target.name]: event.target.value };
+    });
+    if (event.target.name === 'newPassword') {
+      if (event.target.value.length < 8) {
+        setFormError((prev) => {
+          return { ...prev, newPassword: false };
+        });
+      } else {
+        setFormError((prev) => {
+          return { ...prev, newPassword: true };
+        });
+      }
+    }
+
+    if (event.target.name === 'confirmPassword') {
+      if (form.newPassword != event.target.value) {
+        setFormError((prev) => {
+          return { ...prev, confirmPassword: false };
+        });
+      } else {
+        setFormError((prev) => {
+          return { ...prev, confirmPassword: true };
+        });
+      }
+    }
+  }
+  console.log(formError);
+
+  function changePassword(event) {
+    event.preventDefault();
+    console.log(form);
+  }
+
   return (
     <div className={`${styles.cont}`}>
       <h1>Home</h1>
@@ -14,8 +62,65 @@ function Home({ user }) {
       </div>
 
       <div>
-        <button className={`${styles.passButton}`}>Change Password</button>
+        {!showForm && (
+          <button
+            className={`${styles.passButton}`}
+            onClick={() => {
+              setShowForm((prev) => !prev);
+            }}
+          >
+            Change Password
+          </button>
+        )}
       </div>
+      {showForm && (
+        <form action='' onSubmit={changePassword} className={`${styles.form}`}>
+          <div className={`${styles.passdiv}`}>
+            <input
+              type={showPass ? 'text' : 'password'}
+              placeholder='New Password'
+              name='newPassword'
+              onChange={updateForm}
+              className={`${styles.input}`}
+            />
+            <div
+              className={`${styles.error} ${
+                formError.newPassword ? styles.green : styles.red
+              }`}
+            >
+              {!formError.newPassword && <FaSkullCrossbones />}
+              {formError.newPassword && <FaCheck />}
+            </div>
+            <button
+              onClick={() => {
+                setShowPass((prev) => !prev);
+              }}
+              className={`${styles.showPass}`}
+            >
+              {showPass && <IoIosEye />}
+              {!showPass && <IoIosEyeOff />}
+            </button>
+          </div>
+          <div className={`${styles.passdiv}`}>
+            <input
+              type='password'
+              placeholder='Confirm Password'
+              name='confirmPassword'
+              onChange={updateForm}
+              className={`${styles.input}`}
+            />
+            <div
+              className={`${styles.error} ${
+                formError.confirmPassword ? styles.green : styles.red
+              }`}
+            >
+              {!formError.confirmPassword && <FaSkullCrossbones />}
+              {formError.confirmPassword && <FaCheck />}
+            </div>
+          </div>
+          <button className={`${styles.submitButton}`}>Change Password</button>
+        </form>
+      )}
     </div>
   );
 }

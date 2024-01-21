@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     console.log(session.data?.user);
     if (session.status === 'unauthenticated') {
-      // router.push('/login');
+      router.push('/login');
     }
   }, [session]);
 

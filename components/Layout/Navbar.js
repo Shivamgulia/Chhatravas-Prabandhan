@@ -12,7 +12,12 @@ function Navbar() {
       <div className={`${styles.logo}`} onclick={signOut}>
         HMS
       </div>
-      <div className={`${styles.profile}`} onClick={signOut}>
+      <div
+        className={`${styles.profile}`}
+        onClick={() => {
+          signOut();
+        }}
+      >
         <Image src={Profile} />
       </div>
     </div>

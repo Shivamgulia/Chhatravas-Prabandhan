@@ -30,11 +30,11 @@ export default async function handler(req, res) {
 
     const query = `SELECT * FROM maintenance_issues WHERE hostel = "${hostel}" AND status = true LIMIT ${rows} OFFSET ${offset}`;
 
-    const [students] = await connection.execute(query);
+    const [maintainance] = await connection.execute(query);
 
     await connection.end();
 
-    res.status(200).json({ students });
+    res.status(200).json({ maintainance });
   } catch (error) {
     console.error('MySQL error:', error);
     res.status(500).json({ message: 'Internal Server Error' });

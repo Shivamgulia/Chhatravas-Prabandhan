@@ -14,6 +14,7 @@ const user = {
 
 const Profile = () => {
   const session = useSession();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   useEffect(() => {
     if (session.data?.user) {
@@ -22,7 +23,7 @@ const Profile = () => {
     }
 
     if (session.status === 'unauthenticated') {
-      // router.push('/login');
+      router.push('/login');
     }
   }, [session]);
   console.log(user);
