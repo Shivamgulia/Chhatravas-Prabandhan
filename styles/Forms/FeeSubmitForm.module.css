@@ -1,0 +1,56 @@
+.cont {
+  display: grid;
+  margin-left: 12.5vw;
+  margin-top: 5vh;
+  grid-template-columns: 60vw;
+}
+
+.heading {
+  color: var(--head-color);
+  font-size: 50px;
+  padding-left: 20px;
+}
+
+.form {
+  background-color: var(--secondary-color);
+  padding: 40px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  border-radius: 20px;
+}
+.inputDiv {
+  display: grid;
+}
+.label {
+  color: var(--primary-color);
+  font-size: 30px;
+}
+.input {
+  font-size: 30px;
+  border-style: none solid solid none;
+  border-width: 0px 5px 5px 0px;
+  background-color: var(--tertiary-color);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  border-style: solid none none solid;
+  border-width: 5px 0px 0px 10px;
+}
+
+.button {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  color: var(--base-color);
+  border-style: none;
+  font-size: 40px;
+  transition: all 0.5s;
+}
+
+.button:hover {
+  background-color: var(--primary-color);
+  color: var(--base-color);
+  cursor: pointer;
+}

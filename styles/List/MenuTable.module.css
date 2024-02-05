@@ -1,0 +1,22 @@
+.cont {
+  color: black;
+  display: grid;
+  place-items: center;
+}
+
+.table {
+}
+
+.thead {
+}
+
+.tbody {
+}
+
+.head {
+  border-style: solid;
+}
+
+.content {
+  border-style: solid;
+}

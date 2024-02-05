@@ -12,6 +12,9 @@ function Sidebar() {
       <Link href={'/'}>
         <div className={`${styles.link}`}>Dashboard</div>
       </Link>
+      <Link href={'/mess'}>
+        <div className={`${styles.link}`}>Mess</div>
+      </Link>
       <Link href={'/warden'}>
         <div className={`${styles.link}`}>Warden Dashboard</div>
       </Link>
@@ -20,6 +23,9 @@ function Sidebar() {
       </Link>
       <Link href={'/employee'}>
         <div className={`${styles.link}`}>Employees</div>
+      </Link>
+      <Link href={'/fee'}>
+        <div className={`${styles.link}`}>Fee</div>
       </Link>
     </div>
   );
