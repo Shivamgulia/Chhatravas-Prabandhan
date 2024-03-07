@@ -1,22 +1,91 @@
 .cont {
-  color: black;
-  display: grid;
-  place-items: center;
+  margin: 20px;
 }
 
 .table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .thead {
-}
-
-.tbody {
+  background-color: #007bff;
+  color: #fff;
 }
 
 .head {
-  border-style: solid;
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.tbody:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 .content {
-  border-style: solid;
+  color: #007bff;
+  padding: 15px;
+}
+
+.tbody:hover {
+  background-color: #f0f0f0;
+}
+
+/* modal styles */
+.modalCont {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  max-width: 400px; /* Adjust as needed */
+  margin: 0 auto; /* Center the modal horizontally */
+}
+
+.day {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px; /* Add some spacing between day and inputs */
+}
+
+.modalInputDiv {
+  margin-bottom: 15px; /* Add some vertical spacing between input groups */
+}
+
+.modallabel {
+  font-size: 18px;
+  color: #666;
+}
+
+.modalinput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.modalinput:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
 }

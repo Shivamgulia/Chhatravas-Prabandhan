@@ -57,7 +57,7 @@ function Home({ user }) {
       <div className={`${styles.details}`}>
         <h3>name : {user.name}</h3>
         <h3>email : {user.email}</h3>
-        <h3>rollno : {user.rollno}</h3>
+        {user.rollno != 0 && <h3>rollno : {user.rollno}</h3>}
         <h3>hostel : {user.hostel}</h3>
       </div>
 

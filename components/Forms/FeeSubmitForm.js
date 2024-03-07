@@ -15,7 +15,7 @@ function FeeSubmitForm() {
   }
   return (
     <div className={`${styles.cont}`}>
-      <h1 className={`${styles.heading}`}>Raise Issue</h1>
+      <h1 className={`${styles.heading}`}>Fee Update</h1>
       <form className={`${styles.form}`} onSubmit={handleSubmit}>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor='' className={`${styles.label}`}>
@@ -27,7 +27,10 @@ function FeeSubmitForm() {
           <label htmlFor='' className={`${styles.label}`}>
             Fee Type
           </label>
-          <input type='text' className={`${styles.input}`} required />
+          <select type='text' className={`${styles.input}`} required>
+            <option value='hostel'>Hostel</option>
+            <option value='mess'>Mess</option>
+          </select>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor='' className={`${styles.label}`}>
@@ -41,7 +44,12 @@ function FeeSubmitForm() {
           </label>
           <input type='text' className={`${styles.input}`} required />
         </div>
-
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor='' className={`${styles.label}`}>
+            Image
+          </label>
+          <input type='File' className={`${styles.input}`} required />
+        </div>
         <button className={`${styles.button}`}>Raise Issue</button>
       </form>
     </div>

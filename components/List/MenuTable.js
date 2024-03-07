@@ -1,10 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 import styles from '../../styles/List/MenuTable.module.css';
 
-function MenuTable() {
+import Modal from '../modal/Modal';
+
+function MenuTable(props) {
+  const [showModal, setShowModal] = useState(false);
+  const [item, setItem] = useState(null);
+
+  const session = useSession();
+
+  async function updateMenu(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formObj = new FormData(form);
+    const updates = { ...Object.fromEntries(formObj), id: item.id };
+
+    const res = await fetch('/api/v1/menu/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + session.data.user.token,
+      },
+      body: JSON.stringify(updates),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      props.update();
+      console.log(data);
+    } else {
+      console.log(res);
+    }
+  }
+
+  function openModal() {
+    setShowModal(true);
+    console.log(item);
+  }
+  function closeModal() {
+    setShowModal(false);
+  }
+
   return (
     <div className={`${styles.cont}`}>
+      <Modal isOpen={showModal} onClose={closeModal}>
+        <form className={`${styles.modalCont}`} onSubmit={updateMenu}>
+          <h1 className={`${styles.day}`}>{item?.day}</h1>
+          <div className={`${styles.modalInputDiv}`}>
+            <h2 className={`${styles.modallabel}`}>BreakFast:</h2>
+            <input
+              type='text'
+              name='breakfast'
+              defaultValue={item?.breakfast}
+              className={`${styles.modalinput}`}
+            />
+          </div>
+          <div className={`${styles.modalInputDiv}`}>
+            <h2 className={`${styles.modallabel}`}>Lunch:</h2>
+            <input
+              type='text'
+              name='lunch'
+              defaultValue={item?.lunch}
+              className={`${styles.modalinput}`}
+            />
+          </div>
+          <div className={`${styles.modalInputDiv}`}>
+            <h2 className={`${styles.modallabel}`}>Snack:</h2>
+            <input
+              type='text'
+              name='snack'
+              defaultValue={item?.snack}
+              className={`${styles.modalinput}`}
+            />
+          </div>
+          <div className={`${styles.modalInputDiv}`}>
+            <h2 className={`${styles.modallabel}`}>Dinner:</h2>
+            <input
+              type='text'
+              name='dinner'
+              defaultValue={item?.dinner}
+              className={`${styles.modalinput}`}
+            />
+          </div>
+          <button className={`${styles.button}`} type='submit'>
+            Update
+          </button>
+        </form>
+      </Modal>
       <table className={`${styles.table}`}>
         <thead>
           <tr className={`${styles.thead}`}>
@@ -16,13 +100,24 @@ function MenuTable() {
           </tr>
         </thead>
         <tbody>
-          <tr className={`${styles.tbody}`}>
-            <td className={`${styles.content}`}>Monday</td>
-            <td className={`${styles.content}`}>a</td>
-            <td className={`${styles.content}`}>a</td>
-            <td className={`${styles.content}`}>b</td>
-            <td className={`${styles.content}`}>b</td>
-          </tr>
+          {props.menu.map((item, index) => {
+            return (
+              <tr
+                className={`${styles.tbody}`}
+                key={item.id}
+                onClick={() => {
+                  setItem(item);
+                  openModal();
+                }}
+              >
+                <td className={`${styles.content}`}>{item.day}</td>
+                <td className={`${styles.content}`}>{item.breakfast}</td>
+                <td className={`${styles.content}`}>{item.lunch}</td>
+                <td className={`${styles.content}`}>{item.snack}</td>
+                <td className={`${styles.content}`}>{item.dinner}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

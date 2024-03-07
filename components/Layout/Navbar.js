@@ -9,8 +9,8 @@ import styles from '../../styles/Layout/Navbar.module.css';
 function Navbar() {
   return (
     <div className={`${styles.mainNav}`}>
-      <div className={`${styles.logo}`} onclick={signOut}>
-        HMS
+      <div className={`${styles.logo}`} onClick={signOut}>
+        Hostel Management System
       </div>
       <div
         className={`${styles.profile}`}
@@ -18,7 +18,7 @@ function Navbar() {
           signOut();
         }}
       >
-        <Image src={Profile} />
+        <Image src={Profile} alt='logout' />
       </div>
     </div>
   );

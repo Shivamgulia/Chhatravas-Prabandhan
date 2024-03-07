@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    const query = `SELECT * FROM maintenance_issues WHERE hostel = "${hostel}" AND status = true LIMIT ${rows} OFFSET ${offset}`;
+    const query = `SELECT * FROM maintenance_issues WHERE hostel = "${hostel}" AND status = 1 LIMIT ${rows} OFFSET ${offset}`;
 
     const [maintainance] = await connection.execute(query);
 

@@ -56,6 +56,7 @@ const authOptions = {
     signIn: '/login',
     error: '/login',
     signOut: '/login',
+    signUp: '/signup',
   },
 };
 

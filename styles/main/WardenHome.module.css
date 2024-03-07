@@ -1,4 +1,4 @@
-.cont {
+/* .cont {
   display: grid;
   place-items: center;
   color: black;
@@ -15,4 +15,44 @@
 
 .item {
   font-size: 20px;
+} */
+
+/* Define styles for the container */
+.cont {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 90vh;
+}
+
+/* Style the heading */
+.cont h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Style the list */
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the list items */
+.item {
+  margin-bottom: 10px;
+  padding: 12px 20px;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect for list items */
+.item:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

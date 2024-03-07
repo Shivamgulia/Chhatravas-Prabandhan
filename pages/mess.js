@@ -1,24 +1,26 @@
+import Layout from '@/components/Layout/Layout';
 import React, { useEffect } from 'react';
+
+import Menu from '@/components/main/Mess/Menu';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-import Layout from '@/components/Layout/Layout';
-import RaiseIssue from '@/components/Forms/RaiseIssue';
-
-function raise() {
+function index() {
   const session = useSession();
+
   const router = useRouter();
+
   useEffect(() => {
-    console.log(session.data?.user);
     if (session.status === 'unauthenticated') {
       router.push('/login');
     }
-  }, [session]);
+  }, []);
+
   return (
     <Layout>
-      <RaiseIssue />
+      <Menu />
     </Layout>
   );
 }
 
-export default raise;
+export default index;
