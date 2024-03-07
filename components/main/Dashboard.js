@@ -103,7 +103,7 @@ const NoticeBoard = () => {
 
       <Modal isOpen={showModal} onClose={closeModal}>
         <div className={`${styles.modalCont}`}>
-          <h2 className={`${styles.modalHead}`}>Notice</h2>
+          <h2 className={`${styles.modalHead}`}>{notice.head}</h2>
           <p className={`${styles.modalNotice}`}>{notice.details}</p>
         </div>
       </Modal>

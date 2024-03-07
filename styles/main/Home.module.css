@@ -71,4 +71,10 @@
   color: var(--primary-color);
   font-size: 20px;
   font-weight: bolder;
+  transition: all 0.5s;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-color);
+  color: var(--base-color);
 }
