@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 import styles from '../../styles/List/MenuTable.module.css';
 
@@ -10,6 +11,7 @@ function MenuTable(props) {
   const [item, setItem] = useState(null);
 
   const session = useSession();
+  const router = useRouter();
 
   async function updateMenu(event) {
     event.preventDefault();
@@ -106,8 +108,10 @@ function MenuTable(props) {
                 className={`${styles.tbody}`}
                 key={item.id}
                 onClick={() => {
-                  setItem(item);
-                  openModal();
+                  if (router.pathname === '/updatemenu') {
+                    setItem(item);
+                    openModal();
+                  }
                 }}
               >
                 <td className={`${styles.content}`}>{item.day}</td>

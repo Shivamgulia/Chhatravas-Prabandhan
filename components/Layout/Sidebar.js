@@ -21,7 +21,7 @@ function Sidebar() {
 
   return (
     <div className={`${styles.cont}`}>
-      <Link href={'/profile'}>
+      {/* <Link href={'/profile'}>
         <div
           className={`${styles.link} ${
             router.pathname.includes('/profile') ? styles.active : ''
@@ -29,7 +29,7 @@ function Sidebar() {
         >
           Home
         </div>
-      </Link>
+      </Link> */}
       <Link href={'/'}>
         <div
           className={`${styles.link} ${
@@ -58,15 +58,26 @@ function Sidebar() {
         </div>
       </Link>
       {warden && (
-        <Link href={'/warden'}>
-          <div
-            className={`${styles.link} ${
-              router.pathname.includes('/warden') ? styles.active : ''
-            }`}
-          >
-            Warden Dashboard
-          </div>
-        </Link>
+        <>
+          <Link href={'/warden'}>
+            <div
+              className={`${styles.link} ${
+                router.pathname.includes('/warden') ? styles.active : ''
+              }`}
+            >
+              Warden
+            </div>
+          </Link>
+          <Link href={'/newnotice'}>
+            <div
+              className={`${styles.link} ${
+                router.pathname.includes('/newnotice') ? styles.active : ''
+              }`}
+            >
+              New Notice
+            </div>
+          </Link>
+        </>
       )}
       <Link href={'/maintainance'}>
         <div

@@ -29,10 +29,7 @@ export default function Home() {
         <title>DashBoard</title>
       </Head>
       <Layout>
-        <div
-          className={`${styles.cont} ${inter.className}`}
-          style={{ paddingTop: '30px' }}
-        >
+        <div className={`${styles.cont} ${inter.className}`}>
           <Dashboard />
         </div>
       </Layout>

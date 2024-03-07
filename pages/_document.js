@@ -4,11 +4,13 @@ export default function Document() {
   return (
     <Html lang='en'>
       <Head>
+        {/* 
+        Recaptcha script
         <script
           src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit'
           async
           defer
-        ></script>
+        ></script> */}
       </Head>
       <body>
         <Main />

@@ -25,9 +25,48 @@
   display: flex;
   justify-content: right;
   height: 10vh;
+  transition: all 0.5s;
 }
 
 .profile > img {
   height: 10vh;
   width: fit-content;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: var(--primary-color);
+  right: 10px;
+  top: 10vh;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 2;
+  transition: all 0.5s;
+}
+
+.dropItem {
+  color: white;
+  padding: 10px 20px;
+  font-size: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.dropItem:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.profile:hover .dropdown {
+  display: block;
+  animation: appear 0.5s;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

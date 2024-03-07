@@ -1,6 +1,6 @@
 .cont {
   display: grid;
-  min-width: 100vh;
+  width: 100wh;
   grid-template-rows: 10vh 90vh;
   color: black;
   background-color: white;

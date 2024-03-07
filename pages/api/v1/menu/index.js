@@ -7,8 +7,6 @@ import dbConfig from '@/assets/database/db';
 export default async function handler(req, res) {
   const token = req.headers.authorization;
 
-  console.log(token);
-
   const decodedToken = verifyToken(token);
 
   if (!decodedToken) {
