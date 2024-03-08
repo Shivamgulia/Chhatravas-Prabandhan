@@ -16,9 +16,7 @@ function employee() {
     }
   }, [session]);
   return (
-    <Layout>
-      <EmployeeList />
-    </Layout>
+    <Layout>{session.status === 'authenticated' && <EmployeeList />}</Layout>
   );
 }
 

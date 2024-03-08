@@ -7,36 +7,72 @@ import dbConfig from '@/assets/database/db';
 export default async function handler(req, res) {
   const token = req.headers.authorization;
 
-  console.log(token);
-
   const decodedToken = verifyToken(token);
 
   if (!decodedToken) {
     return res.status(401).json({ message: 'Unauthorized - Invalid token' });
   }
 
-  const rows = 10;
-  const page = req.body.page;
-  const hostel = req.body.hostel;
+  if (req.method === 'POST') {
+    const rows = 10;
+    const page = req.body.page;
+    const hostel = req.body.hostel;
 
-  const offset = (page - 1) * rows;
+    const offset = (page - 1) * rows;
 
-  if (!hostel) {
-    return res.status(400).json({ message: 'Hostel parameter is required' });
+    if (!hostel) {
+      return res.status(400).json({ message: 'Hostel parameter is required' });
+    }
+
+    try {
+      const connection = await mysql.createConnection(dbConfig);
+
+      const query = `SELECT * FROM employees WHERE hostel = "${hostel}" LIMIT ${rows} OFFSET ${offset}`;
+
+      console.log(query);
+
+      const [employees] = await connection.execute(query);
+
+      const [count] = await connection.execute(
+        `SELECT COUNT(*) as count FROM employees WHERE hostel = "${hostel}"`
+      );
+
+      await connection.end();
+
+      console.log(count);
+
+      res
+        .status(200)
+        .json({ employees: employees, count: count[0].count / 10 });
+    } catch (error) {
+      console.error('MySQL error:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   }
 
-  try {
-    const connection = await mysql.createConnection(dbConfig);
+  if (req.method === 'DELETE') {
+    const id = req.body.id;
 
-    const query = `SELECT * FROM employee WHERE hostel = "${hostel}" LIMIT ${rows} OFFSET ${offset}`;
+    console.log(id);
 
-    const [students] = await connection.execute(query);
+    if (!id) {
+      return res.status(400).json({ message: 'Hostel parameter is required' });
+    }
 
-    await connection.end();
+    try {
+      const connection = await mysql.createConnection(dbConfig);
 
-    res.status(200).json({ students });
-  } catch (error) {
-    console.error('MySQL error:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+      const query = `DELETE FROM \`employees\`
+          WHERE id = ${req.body.id};`;
+
+      await connection.execute(query);
+
+      await connection.end();
+
+      res.status(200).json({ message: 'Employee Deleted Sucessfully' });
+    } catch (error) {
+      console.error('MySQL error:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   }
 }
