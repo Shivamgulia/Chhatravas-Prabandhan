@@ -1,8 +1,8 @@
 const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: 'Shivam.mrt10',
-  database: 'HMS',
+  host: process.env.MYSQL_HOSTNAME,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
 };
 
 export default dbConfig;
