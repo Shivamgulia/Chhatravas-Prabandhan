@@ -16,7 +16,7 @@ function signup() {
           signIn();
         }}
       >
-        SignUP
+        SignUp
       </button>
     </div>
   );
