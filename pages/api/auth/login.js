@@ -21,11 +21,13 @@ export default async function handler(req, res) {
   try {
     console.log('dbconfig');
     const connection = await mysql.createConnection(dbConfig);
+    console.log('dbconfig1');
 
     const [rows] = await connection.execute(
       'SELECT * FROM users WHERE email = ?',
       [email]
     );
+    console.log('dbconfig2');
 
     if (rows.length === 0) {
       return res.status(401).json({ message: 'Invalid email or password' });
@@ -51,6 +53,8 @@ export default async function handler(req, res) {
 
     res.status(200).json({ user, token });
   } catch (error) {
+    console.log('error');
+    console.log(error);
     console.error('MySQL error:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
