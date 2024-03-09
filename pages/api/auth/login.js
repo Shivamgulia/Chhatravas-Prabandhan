@@ -26,6 +26,8 @@ export default async function handler(req, res) {
       [email]
     );
 
+    console.log(rows);
+
     if (rows.length === 0) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
