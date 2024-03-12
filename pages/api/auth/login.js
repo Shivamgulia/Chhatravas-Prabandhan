@@ -18,16 +18,17 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
+  let connection;
   try {
     console.log('dbconfig');
-    const connection = await mysql.createConnection(dbConfig);
-    console.log('dbconfig1');
+    connection = await mysql.createConnection(dbConfig);
 
+    console.log('dbconfig');
     const [rows] = await connection.execute(
       'SELECT * FROM users WHERE email = ?',
       [email]
     );
-    console.log('dbconfig2');
+    console.log(rows);
 
     if (rows.length === 0) {
       return res.status(401).json({ message: 'Invalid email or password' });

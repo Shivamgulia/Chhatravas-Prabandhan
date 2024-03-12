@@ -4,24 +4,7 @@ import { useSession } from 'next-auth/react';
 import styles from '../../styles/main/Dashboard.module.css';
 import Modal from '../modal/Modal';
 
-const Notices = [
-  {
-    head: 'HOSTEL RULES',
-    details:
-      'Hostel loreum ipsum dolor sit amet consectetur adipisicing elit. Quae voluptatibus, magnam quos, quod, quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem.',
-  },
-  {
-    head: 'UPCOMMING MAINTENANCE',
-    details:
-      'Upcoming loreum ipsum dolor sit amet consectetur adipisicing elit. Quae voluptatibus, magnam quos, quod, quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem.',
-  },
-  ,
-  {
-    head: 'MESS PLAN CHANGED',
-    details:
-      'Mess loreum ipsum dolor sit amet consectetur adipisicing elit. Quae voluptatibus, magnam quos, quod, quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem, quod, quos, quae voluptatibus quibusdam quia quas quidem aperiam doloremque praesentium quas quibusdam quia quae. Quisquam, quidem. Quisquam quidem.',
-  },
-];
+const Notices = [];
 
 const NoticeBoard = () => {
   const [showModal, setShowModal] = useState(false);
