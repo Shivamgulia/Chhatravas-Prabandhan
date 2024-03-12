@@ -20,15 +20,12 @@ export default async function handler(req, res) {
 
   let connection;
   try {
-    console.log('dbconfig');
     connection = await mysql.createConnection(dbConfig);
 
-    console.log('dbconfig');
     const [rows] = await connection.execute(
       'SELECT * FROM users WHERE email = ?',
       [email]
     );
-    console.log(rows);
 
     if (rows.length === 0) {
       return res.status(401).json({ message: 'Invalid email or password' });
