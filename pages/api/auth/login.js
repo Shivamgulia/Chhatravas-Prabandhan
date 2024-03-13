@@ -48,7 +48,7 @@ export default async function handler(req, res) {
           { userId: user.id, userEmail: user.email },
           'havefuneveryone',
           {
-            expiresIn: '1h',
+            expiresIn: '365d',
           }
         );
 
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
           { userId: user.id, userEmail: user.email },
           'havefuneveryone',
           {
-            expiresIn: '1h',
+            expiresIn: '365d',
           }
         );
 
@@ -79,7 +79,7 @@ export default async function handler(req, res) {
       { userId: user.id, userEmail: user.email },
       'havefuneveryone',
       {
-        expiresIn: 'never',
+        expiresIn: '365d',
       }
     );
 

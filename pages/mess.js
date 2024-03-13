@@ -14,7 +14,7 @@ function index() {
     if (session.status === 'unauthenticated') {
       router.push('/login');
     }
-  }, []);
+  }, [session.status]);
 
   return (
     <Layout>
