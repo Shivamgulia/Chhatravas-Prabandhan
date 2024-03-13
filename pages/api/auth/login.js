@@ -39,7 +39,7 @@ export default async function handler(req, res) {
 
     if (user.rollno != 0) {
       const [student] = await connection.execute(
-        'SELECT * FROM students WHERE rollno = ? AND active = 1',
+        'SELECT * FROM students WHERE rollno = ? AND active = 1;',
         [user.rollno]
       );
 
@@ -79,7 +79,7 @@ export default async function handler(req, res) {
       { userId: user.id, userEmail: user.email },
       'havefuneveryone',
       {
-        expiresIn: '1h',
+        expiresIn: 'never',
       }
     );
 
@@ -95,4 +95,5 @@ export default async function handler(req, res) {
     await connection.end();
     res.status(500).json({ message: 'Internal Server Error' });
   }
+  res.status(500).json({ message: 'Method not allowed' });
 }
