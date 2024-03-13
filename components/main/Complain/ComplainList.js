@@ -57,24 +57,27 @@ function StudentList() {
           })}
         </tbody>
       </table>
-      <div className={`${styles.btns}`}>
-        <button
-          onClick={() => {
-            if (page > 1) setPage(page - 1);
-          }}
-          className={`${styles.btn}`}
-        >
-          prev
-        </button>
-        <button
-          onClick={() => {
-            if (page < pages) setPage(page + 1);
-          }}
-          className={`${styles.btn}`}
-        >
-          next
-        </button>
-      </div>
+      {(pages > 1) &
+      (
+        <div className={`${styles.btns}`}>
+          <button
+            onClick={() => {
+              if (page > 1) setPage(page - 1);
+            }}
+            className={`${styles.btn}`}
+          >
+            prev
+          </button>
+          <button
+            onClick={() => {
+              if (page < pages) setPage(page + 1);
+            }}
+            className={`${styles.btn}`}
+          >
+            next
+          </button>
+        </div>
+      )}
     </div>
   );
 }

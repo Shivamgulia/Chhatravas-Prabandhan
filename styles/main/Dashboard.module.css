@@ -166,3 +166,24 @@
   font-size: 20px;
   grid-area: day;
 }
+
+.complainDiv {
+  /* background-color: #003060; */
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.complainButton {
+  border: none;
+  background-color: #003060;
+  /* background-color: var(--tertiary-color); */
+
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+
+.complainButton:hover {
+  background-color: #68bbe3;
+  color: #003060;
+}

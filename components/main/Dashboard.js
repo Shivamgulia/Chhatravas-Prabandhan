@@ -76,6 +76,25 @@ const NoticeBoard = () => {
           </ul>
         </div>
 
+        <div className={`${styles.complainDiv}`}>
+          <button
+            className={`${styles.complainButton}`}
+            onClick={() => {
+              setShowComplain(true);
+            }}
+          >
+            Raise Complain
+          </button>
+          <Modal
+            isOpen={showComplain}
+            onClose={() => {
+              setShowComplain(false);
+            }}
+          >
+            <ComplainForm />
+          </Modal>
+        </div>
+
         <div className={`${styles.sideCont}`}>
           <h2 className={`${styles.sideHead}`}>Today's Menu</h2>
           <ul className={`${styles.sidelist}`}>
@@ -109,24 +128,6 @@ const NoticeBoard = () => {
               </li>
             ))}
           </ul>
-        </div>
-
-        <div>
-          <button
-            onClick={() => {
-              setShowComplain(true);
-            }}
-          >
-            Show Complain Form
-          </button>
-          <Modal
-            isOpen={showComplain}
-            onClose={() => {
-              setShowComplain(false);
-            }}
-          >
-            <ComplainForm />
-          </Modal>
         </div>
 
         <div className={`${styles.emergency}`}>
