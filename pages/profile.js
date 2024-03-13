@@ -16,19 +16,19 @@ const Profile = () => {
   const session = useSession();
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState('');
   useEffect(() => {
     if (session.data?.user) {
       setUser(session.data.user.user);
-      console.log(user);
+      setToken(session.data.user.token);
     }
 
     if (session.status === 'unauthenticated') {
       router.push('/login');
     }
   }, [session]);
-  console.log(user);
 
-  return <Layout>{user && <Home user={user} />}</Layout>;
+  return <Layout>{user && <Home user={user} token={token} />}</Layout>;
 };
 
 export default Profile;

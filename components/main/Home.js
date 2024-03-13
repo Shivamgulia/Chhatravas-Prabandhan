@@ -4,7 +4,7 @@ import { IoIosEyeOff, IoIosEye } from 'react-icons/io';
 
 import styles from '../../styles/main/Home.module.css';
 
-function Home({ user }) {
+function Home({ user, token }) {
   const [showPass, setShowPass] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [formError, setFormError] = useState({
@@ -21,7 +21,7 @@ function Home({ user }) {
       return { ...prev, [event.target.name]: event.target.value };
     });
     if (event.target.name === 'newPassword') {
-      if (event.target.value.length < 8) {
+      if (event.target.value.length < 5) {
         setFormError((prev) => {
           return { ...prev, newPassword: false };
         });
@@ -44,11 +44,27 @@ function Home({ user }) {
       }
     }
   }
-  console.log(formError);
 
-  function changePassword(event) {
+  async function changePassword(event) {
     event.preventDefault();
     console.log(form);
+    if (formError.newPassword && formError.confirmPassword) {
+      console.log('in');
+
+      const res = await fetch('/api/auth/resetpassword', {
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: user.email, password: form.newPassword }),
+      });
+      if (res.ok) {
+        alert('Password Updated');
+      } else {
+        alert('Pawword Change Failed');
+      }
+    }
   }
 
   return (
@@ -118,7 +134,9 @@ function Home({ user }) {
               {formError.confirmPassword && <FaCheck />}
             </div>
           </div>
-          <button className={`${styles.submitButton}`}>Change Password</button>
+          <button className={`${styles.submitButton}`} onClick={changePassword}>
+            Change Password
+          </button>
         </form>
       )}
     </div>

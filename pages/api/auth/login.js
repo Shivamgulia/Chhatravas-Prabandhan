@@ -37,6 +37,44 @@ export default async function handler(req, res) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
+    if (user.rollno != 0) {
+      const [student] = await connection.execute(
+        'SELECT * FROM students WHERE rollno = ? AND active = 1',
+        [user.rollno]
+      );
+
+      if (student[0]) {
+        const token = sign(
+          { userId: user.id, userEmail: user.email },
+          'havefuneveryone',
+          {
+            expiresIn: '1h',
+          }
+        );
+
+        await connection.end();
+
+        user.password = undefined;
+
+        res
+          .status(200)
+          .json({ user: { ...student[0], email: user.email }, token });
+      } else {
+        const token = sign(
+          { userId: user.id, userEmail: user.email },
+          'havefuneveryone',
+          {
+            expiresIn: '1h',
+          }
+        );
+
+        await connection.end();
+
+        user.password = undefined;
+
+        res.status(200).json({ user, token });
+      }
+    }
     const token = sign(
       { userId: user.id, userEmail: user.email },
       'havefuneveryone',
@@ -54,6 +92,7 @@ export default async function handler(req, res) {
     console.log('error');
     console.log(error);
     console.error('MySQL error:', error);
+    await connection.end();
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }
