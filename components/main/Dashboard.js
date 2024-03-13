@@ -3,11 +3,13 @@ import { useSession } from 'next-auth/react';
 
 import styles from '../../styles/main/Dashboard.module.css';
 import Modal from '../modal/Modal';
+import ComplainForm from '../Forms/ComplainForm';
 
 const Notices = [];
 
 const NoticeBoard = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showComplain, setShowComplain] = useState(false);
   const [notice, setNotice] = useState({});
   const [loading, setLoading] = useState({});
   const [notices, setNotices] = useState(Notices);
@@ -107,6 +109,24 @@ const NoticeBoard = () => {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div>
+          <button
+            onClick={() => {
+              setShowComplain(true);
+            }}
+          >
+            Show Complain Form
+          </button>
+          <Modal
+            isOpen={showComplain}
+            onClose={() => {
+              setShowComplain(false);
+            }}
+          >
+            <ComplainForm />
+          </Modal>
         </div>
 
         <div className={`${styles.emergency}`}>

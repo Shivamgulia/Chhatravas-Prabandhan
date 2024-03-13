@@ -57,6 +57,15 @@ function Sidebar() {
           Update Mess
         </div>
       </Link>
+      <Link href={'/complains'}>
+        <div
+          className={`${styles.link} ${
+            router.pathname === '/complains' ? styles.active : ''
+          }`}
+        >
+          Complains
+        </div>
+      </Link>
       {warden && (
         <>
           <Link href={'/warden'}>
