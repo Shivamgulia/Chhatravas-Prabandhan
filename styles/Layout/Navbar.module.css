@@ -23,14 +23,26 @@
 
 .profile {
   display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-direction: column;
   justify-content: right;
+
+  padding-top: 2.5vh;
+
+  padding-right: 2.5vw;
   height: 10vh;
+  color: var(--secondary-color);
   transition: all 0.5s;
 }
 
-.profile > img {
-  height: 10vh;
+.profile > h3 {
+}
+
+.icon {
+  height: 5vh;
   width: fit-content;
+  color: var(--secondary-color);
 }
 
 .dropdown {
