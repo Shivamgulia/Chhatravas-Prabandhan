@@ -1,9 +1,32 @@
 .cont {
   display: grid;
   min-height: 100vh;
+  grid-template-rows: 10vh 90vh;
   width: 100vw;
   place-items: center;
   background-color: white;
+}
+
+.loginCont {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
+}
+
+.loginButton {
+  border: none;
+  background-color: inherit;
+  border-radius: 8px;
+  color: var(--primary-color);
+  font-size: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+
+.loginButton:hover {
+  color: inherit;
+  background-color: var(--primary-color);
 }
 
 .signUpButton {

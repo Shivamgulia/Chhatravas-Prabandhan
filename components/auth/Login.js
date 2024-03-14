@@ -37,6 +37,17 @@ export default function Login() {
 
   return (
     <div className={`${styles.cont}`}>
+      <div className={`${styles.signCont}`}>
+        <button
+          className={styles.signUpButton}
+          type='button'
+          onClick={() => {
+            router.push('signup');
+          }}
+        >
+          Sign Up
+        </button>
+      </div>
       <div className={styles.loginCont}>
         <h1>Login</h1>
         <form action='' className={styles.loginForm} onSubmit={onSubmit}>
@@ -85,7 +96,9 @@ export default function Login() {
             <label htmlFor='showP'>Show Password</label>
           </div>
 
-          <button className={styles.loginButton}>Login</button>
+          <button className={styles.loginButton} type='submit'>
+            Login
+          </button>
         </form>
       </div>
     </div>

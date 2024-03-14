@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { useRouter } from 'next/router';
 
 import SignUpForm from '@/components/Forms/SignUpForm';
 
 import styles from '../styles/SignUp.module.css';
-import { set } from 'mongoose';
 
 function signup() {
+  const router = useRouter();
   const [showForm, setShowForm] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
@@ -39,22 +40,36 @@ function signup() {
   }, []);
   return (
     <div className={`${styles.cont}`}>
-      {!showForm && (
-        <div className={`${styles.signUpButton}`}>
-          <div id='signInButton'></div>
-          <h2 className={`${styles.signText}`}>
-            Create an Accout With you College Gmail Account
-          </h2>
-          {error && (
-            <h2 className={`${styles.signError}`}>Use College Account Only</h2>
-          )}
-        </div>
-      )}
-      {showForm && (
-        <div>
-          <SignUpForm user={user} />
-        </div>
-      )}
+      <div className={`${styles.loginCont}`}>
+        <button
+          className={`${styles.loginButton}`}
+          onClick={() => {
+            router.push('/login');
+          }}
+        >
+          Login
+        </button>
+      </div>
+      <div>
+        {!showForm && (
+          <div className={`${styles.signUpButton}`}>
+            <div id='signInButton'></div>
+            <h2 className={`${styles.signText}`}>
+              Create an Accout With you College Gmail Account
+            </h2>
+            {error && (
+              <h2 className={`${styles.signError}`}>
+                U se College Account Only
+              </h2>
+            )}
+          </div>
+        )}
+        {showForm && (
+          <div>
+            <SignUpForm user={user} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
