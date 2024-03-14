@@ -9,9 +9,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' });
+  const { name, email, password, rollno } = req.body;
+  console.log(req.body);
+  if (!email || !password || !name || !rollno) {
+    return res.status(400).json({ message: 'All Fields are required' });
   }
 
   try {
@@ -31,8 +32,8 @@ export default async function handler(req, res) {
     const hashedPassword = hashSync(password, 10);
 
     await connection.execute(
-      'INSERT INTO users (email, password) VALUES (?, ?)',
-      [email, hashedPassword]
+      'INSERT INTO users (name, email, password, rollno) VALUES (?, ?, ?, ?)',
+      [name, email, hashedPassword, rollno]
     );
 
     res.status(201).json({ message: 'User registered successfully' });

@@ -6,6 +6,7 @@ import styles from '../../styles/main/WardenHome.module.css';
 const functionList = [
   { title: 'Student List', path: '/warden/stdlist' },
   { title: 'Maintanance Problems', path: '/warden/issue' },
+  { title: 'Add Students', path: '/warden/addstudents' },
 ];
 
 function WardenHome() {

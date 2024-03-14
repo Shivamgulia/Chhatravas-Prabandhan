@@ -1,0 +1,21 @@
+.cont {
+  display: grid;
+  min-height: 100vh;
+  width: 100vw;
+  place-items: center;
+  background-color: white;
+}
+
+.signUpButton {
+  display: grid;
+  place-items: center;
+  gap: 2rem;
+}
+
+.signText {
+  color: var(--primary-color);
+}
+
+.signError {
+  color: red;
+}
