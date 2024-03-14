@@ -55,7 +55,6 @@ export default function Login() {
           </div>
           <div className={styles.formInput}>
             <label htmlFor='uname' className={styles.label}>
-              {' '}
               User Name
             </label>
             <input
