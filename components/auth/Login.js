@@ -21,7 +21,6 @@ export default function Login() {
 
   async function onSubmit(event) {
     event.preventDefault();
-    //   call login function here
 
     console.log(uNameRef.current.value);
     console.log(passwordRef.current.value);
