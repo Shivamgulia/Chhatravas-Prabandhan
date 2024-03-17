@@ -1,0 +1,41 @@
+.cont {
+  display: grid;
+  padding-top: 40px;
+  grid-template-columns: 60vw;
+  padding-left: 12.5vw;
+}
+
+.table {
+}
+
+.head {
+  display: grid;
+  color: white;
+  background-color: var(--table-head);
+  grid-template-columns: 50% 25% 25%;
+  border-radius: 10px 10px 0 0;
+}
+
+.headItem {
+  padding: 10px 20px;
+}
+
+.tbody {
+}
+
+.tbody:last-child {
+  border-radius: 0 0 10px 10px;
+  border-style: none none solid none;
+}
+
+.body {
+  display: grid;
+  background-color: white;
+  color: var(--table-head);
+  grid-template-columns: 50% 25% 25%;
+  border-style: none none solid none;
+}
+
+.bodyItem {
+  padding: 10px 20px;
+}

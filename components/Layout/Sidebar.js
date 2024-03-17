@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
-import styles from '../../styles/Layout/Sidebar.module.css';
-import Link from 'next/link';
+import styles from "../../styles/Layout/Sidebar.module.css";
+import Link from "next/link";
 
 function Sidebar() {
   const [warden, setWarden] = useState(false);
@@ -11,7 +11,7 @@ function Sidebar() {
   const router = useRouter();
 
   useEffect(() => {
-    if (session.status === 'authenticated') {
+    if (session.status === "authenticated") {
       if (session.data.user.user.rollno == 0) {
         console.log(session.data.user.user.rollno == 0);
         setWarden(true);
@@ -30,37 +30,37 @@ function Sidebar() {
           Home
         </div>
       </Link> */}
-      <Link href={'/'}>
+      <Link href={"/"}>
         <div
           className={`${styles.link} ${
-            router.pathname === '/' ? styles.active : ''
+            router.pathname === "/" ? styles.active : ""
           }`}
         >
           Dashboard
         </div>
       </Link>
-      <Link href={'/mess'}>
+      <Link href={"/mess"}>
         <div
           className={`${styles.link} ${
-            router.pathname === '/mess' ? styles.active : ''
+            router.pathname === "/mess" ? styles.active : ""
           }`}
         >
           Mess
         </div>
       </Link>
-      <Link href={'/updatemenu'}>
+      <Link href={"/updatemenu"}>
         <div
           className={`${styles.link} ${
-            router.pathname === '/updatemenu' ? styles.active : ''
+            router.pathname === "/updatemenu" ? styles.active : ""
           }`}
         >
           Update Mess
         </div>
       </Link>
-      <Link href={'/complains'}>
+      <Link href={"/complains"}>
         <div
           className={`${styles.link} ${
-            router.pathname === '/complains' ? styles.active : ''
+            router.pathname === "/complains" ? styles.active : ""
           }`}
         >
           Complains
@@ -68,19 +68,19 @@ function Sidebar() {
       </Link>
       {warden && (
         <>
-          <Link href={'/warden'}>
+          <Link href={"/warden"}>
             <div
               className={`${styles.link} ${
-                router.pathname.includes('/warden') ? styles.active : ''
+                router.pathname.includes("/warden") ? styles.active : ""
               }`}
             >
               Warden
             </div>
           </Link>
-          <Link href={'/newnotice'}>
+          <Link href={"/newnotice"}>
             <div
               className={`${styles.link} ${
-                router.pathname.includes('/newnotice') ? styles.active : ''
+                router.pathname.includes("/newnotice") ? styles.active : ""
               }`}
             >
               New Notice
@@ -88,32 +88,43 @@ function Sidebar() {
           </Link>
         </>
       )}
-      <Link href={'/maintainance'}>
+      <Link href={"/maintainance"}>
         <div
           className={`${styles.link} ${
-            router.pathname.includes('/maintainance') ? styles.active : ''
+            router.pathname.includes("/maintainance") ? styles.active : ""
           }`}
         >
           Maintainance
         </div>
       </Link>
-      <Link href={'/employee'}>
+      <Link href={"/employee"}>
         <div
           className={`${styles.link} ${
-            router.pathname.includes('/employee') ? styles.active : ''
+            router.pathname.includes("/employee") ? styles.active : ""
           }`}
         >
           Employees
         </div>
       </Link>
       {!warden && (
-        <Link href={'/fee'}>
+        <Link href={"/fee"}>
           <div
             className={`${styles.link} ${
-              router.pathname === '/fee' ? styles.active : ''
+              router.pathname === "/fee" ? styles.active : ""
             }`}
           >
             Fee
+          </div>
+        </Link>
+      )}
+      {!warden && (
+        <Link href={"/leave"}>
+          <div
+            className={`${styles.link} ${
+              router.pathname === "/leave" ? styles.active : ""
+            }`}
+          >
+            Leave Application
           </div>
         </Link>
       )}

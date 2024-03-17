@@ -7,19 +7,14 @@ import dbConfig from "@/assets/database/db";
 export default async function handler(req, res) {
   const token = req.headers.authorization;
 
-  console.log(token);
-
   const decodedToken = verifyToken(token);
 
   if (!decodedToken) {
     return res.status(401).json({ message: "Unauthorized - Invalid token" });
   }
 
-  const rows = 10;
-  const page = req.body.page;
   const hostel = req.body.hostel;
-
-  const offset = (page - 1) * rows;
+  const rollno = req.body.rollno;
 
   if (!hostel) {
     return res.status(400).json({ message: "Hostel parameter is required" });
@@ -28,13 +23,13 @@ export default async function handler(req, res) {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    const query = `SELECT * FROM students WHERE hostel = "${hostel}" AND active = 1 LIMIT ${rows} OFFSET ${offset}`;
+    const query = `SELECT * FROM \`leave\` WHERE hostel = "${hostel}" AND rollno = ${rollno} AND status = "Pending" ORDER BY id DESC ;`;
 
-    const [students] = await connection.execute(query);
+    const [leaves] = await connection.execute(query);
 
     await connection.end();
 
-    res.status(200).json({ students });
+    res.status(200).json({ leaves });
   } catch (error) {
     console.error("MySQL error:", error);
     res.status(500).json({ message: "Internal Server Error" });

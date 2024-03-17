@@ -1,6 +1,7 @@
 .cont {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   min-height: 90vh;
   padding-top: 40px;
   gap: 2rem;
@@ -75,9 +76,9 @@
   color: rgb(165, 0, 0);
   padding: 20px;
   border: 1px solid #0e86d4;
-  position: absolute;
-  width: 85vw;
+  position: sticky;
   bottom: 0;
+  width: 85vw;
 }
 
 .emergencyhead {
@@ -103,7 +104,7 @@
   border-style: solid;
   /* border-color: #966f33; */
   border-width: 10px;
-  border-image: url('../../assets/Images/border.png') 30 / 19px round;
+  border-image: url("../../assets/Images/border.png") 30 / 19px round;
 }
 
 .modalHead {
@@ -147,8 +148,8 @@
   grid-template-columns: 30% 70%;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
-    'date day'
-    'date month';
+    "date day"
+    "date month";
   list-style: none;
   place-items: center;
   gap: 1rem;

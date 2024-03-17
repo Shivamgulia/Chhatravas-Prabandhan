@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
-import styles from '../../styles/main/Dashboard.module.css';
-import Modal from '../modal/Modal';
-import ComplainForm from '../Forms/ComplainForm';
+import styles from "../../styles/main/Dashboard.module.css";
+import Modal from "../modal/Modal";
+import ComplainForm from "../Forms/ComplainForm";
 
 const Notices = [];
 
@@ -20,25 +20,31 @@ const NoticeBoard = () => {
 
   async function getData() {
     setLoading(true);
-    const res1 = await fetch('/api/v1/menu', {
-      method: 'POST',
+    const res1 = await fetch("/api/v1/menu", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + session.data.user.token,
+        "Content-Type": "application/json",
+        authorization: "Bearer " + session.data.user.token,
       },
       body: JSON.stringify({ hostel: session.data.user.user.hostel }),
     });
     if (res1.ok) {
       const data = await res1.json();
-      setMenu(data.menu[date.getDay() - 1]);
+      let day = date.getDay() - 1;
+      if (day === -1) {
+        day = 6;
+      }
+      setMenu(data.menu[day]);
+      console.log(data.menu[day]);
+      console.log(day);
     } else {
       console.log(res1);
     }
 
-    const res2 = await fetch('/api/v1/notices', {
+    const res2 = await fetch("/api/v1/notices", {
       headers: {
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + session.data.user.token,
+        "Content-Type": "application/json",
+        authorization: "Bearer " + session.data.user.token,
       },
     });
     if (res2.ok) {
@@ -51,7 +57,7 @@ const NoticeBoard = () => {
   }
 
   useEffect(() => {
-    if (session.status === 'authenticated') {
+    if (session.status === "authenticated") {
       getData();
     }
   }, [session.status]);
@@ -145,26 +151,26 @@ const NoticeBoard = () => {
 export default NoticeBoard;
 
 var Days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 ];
 
 var Months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];

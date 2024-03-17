@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
-import styles from '../../styles/Forms/RaiseIssue.module.css';
+import styles from "../../styles/Forms/RaiseIssue.module.css";
 
 function RaiseIssue() {
   const session = useSession();
@@ -15,7 +15,7 @@ function RaiseIssue() {
       if (session.data.user.user) {
         setHostel(session.data.user.user.hostel);
         setRaiser(session.data.user.user.name);
-        setRoomNo(session.data.user.user.room);
+        setRoomNo(session.data.user.user.roomno);
       }
     }
   }, [session]);
@@ -28,11 +28,11 @@ function RaiseIssue() {
     if (session.data && session.data.user.user) {
       if (session.data.user.token) {
         console.log(session.data.user.token);
-        const res = await fetch('/api/v1/maintainance/raise', {
-          method: 'POST',
+        const res = await fetch("/api/v1/maintainance/raise", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            authorization: 'Bearer ' + session.data.user.token,
+            "Content-Type": "application/json",
+            authorization: "Bearer " + session.data.user.token,
           },
           body: JSON.stringify({ roomNo, raiser, description, issue, hostel }),
         });
@@ -47,11 +47,11 @@ function RaiseIssue() {
       <h1 className={`${styles.heading}`}>Raise Issue</h1>
       <form className={`${styles.form}`} onSubmit={handleSubmit}>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor='' className={`${styles.label}`}>
+          <label htmlFor="" className={`${styles.label}`}>
             room_no
           </label>
           <input
-            type='number'
+            type="number"
             className={`${styles.input}`}
             value={roomNo}
             contentEditable={false}
@@ -59,11 +59,11 @@ function RaiseIssue() {
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor='' className={`${styles.label}`}>
+          <label htmlFor="" className={`${styles.label}`}>
             raiser
           </label>
           <input
-            type='text'
+            type="text"
             className={`${styles.input}`}
             value={raiser}
             contentEditable={false}
@@ -71,16 +71,16 @@ function RaiseIssue() {
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor='' className={`${styles.label}`}>
+          <label htmlFor="" className={`${styles.label}`}>
             description
           </label>
-          <input type='text' className={`${styles.input}`} required />
+          <input type="text" className={`${styles.input}`} required />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor='' className={`${styles.label}`}>
+          <label htmlFor="" className={`${styles.label}`}>
             issue
           </label>
-          <input type='text' className={`${styles.input}`} required />
+          <input type="text" className={`${styles.input}`} required />
         </div>
 
         <button className={`${styles.button}`}>Raise Issue</button>

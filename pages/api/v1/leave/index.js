@@ -7,8 +7,6 @@ import dbConfig from "@/assets/database/db";
 export default async function handler(req, res) {
   const token = req.headers.authorization;
 
-  console.log(token);
-
   const decodedToken = verifyToken(token);
 
   if (!decodedToken) {
@@ -28,13 +26,19 @@ export default async function handler(req, res) {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    const query = `SELECT * FROM students WHERE hostel = "${hostel}" AND active = 1 LIMIT ${rows} OFFSET ${offset}`;
+    const query = `SELECT * FROM \`leave\` WHERE hostel = "${hostel}" AND status = "Pending" ORDER BY id DESC   LIMIT ${rows} OFFSET ${offset};`;
 
-    const [students] = await connection.execute(query);
+    const [leaves] = await connection.execute(query);
+
+    const [count] = await connection.execute(
+      `SELECT COUNT(*) FROM \`leave\` WHERE hostel = "${hostel}" AND status = "Pending" ;`
+    );
 
     await connection.end();
 
-    res.status(200).json({ students });
+    const pages = Math.ceil(count / rows);
+
+    res.status(200).json({ leaves, pages });
   } catch (error) {
     console.error("MySQL error:", error);
     res.status(500).json({ message: "Internal Server Error" });

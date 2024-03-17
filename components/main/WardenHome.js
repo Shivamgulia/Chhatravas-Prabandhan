@@ -1,12 +1,13 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-import styles from '../../styles/main/WardenHome.module.css';
+import styles from "../../styles/main/WardenHome.module.css";
 
 const functionList = [
-  { title: 'Student List', path: '/warden/stdlist' },
-  { title: 'Maintanance Problems', path: '/warden/issue' },
-  { title: 'Add Students', path: '/warden/addstudents' },
+  { title: "Student List", path: "/warden/stdlist" },
+  { title: "Maintanance Problems", path: "/warden/issue" },
+  { title: "Add Students", path: "/warden/addstudents" },
+  { title: "Approve Leaves", path: "/warden/leave" },
 ];
 
 function WardenHome() {
