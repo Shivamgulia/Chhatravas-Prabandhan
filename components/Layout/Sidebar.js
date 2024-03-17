@@ -128,6 +128,17 @@ function Sidebar() {
           </div>
         </Link>
       )}
+      {!warden && (
+        <Link href={"/leaveStatus"}>
+          <div
+            className={`${styles.link} ${
+              router.pathname === "/leaveStatus" ? styles.active : ""
+            }`}
+          >
+            Leave Status
+          </div>
+        </Link>
+      )}
     </div>
   );
 }

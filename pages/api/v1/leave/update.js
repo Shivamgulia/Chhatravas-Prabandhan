@@ -19,8 +19,6 @@ export default async function handler(req, res) {
 
   const { id, status } = req.body;
 
-  console.log(req.body);
-
   if (!id || !status) {
     return res.status(400).json({ message: "All parameter is required" });
   }
@@ -30,7 +28,7 @@ export default async function handler(req, res) {
 
   try {
     const query = `
-    UPDATE leave
+    UPDATE \`leave\`
     SET 
     status = ?
     WHERE id = ?;`;
@@ -38,7 +36,7 @@ export default async function handler(req, res) {
     const queryParams = [status, id];
 
     const problem = await db.execute(query, queryParams);
-    console.log(problem);
+
     res.status(201).json({ message: "Updated Successfully" });
   } catch (error) {
     db.end();

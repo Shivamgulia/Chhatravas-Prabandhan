@@ -1,10 +1,10 @@
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
-import styles from "@/styles/main/Warden/StudentList.module.css";
+import styles from "@/styles/main/Warden/LeaveList.module.css";
 import Modal from "@/components/modal/Modal";
 
-function StudentList() {
+function LeaveList() {
   const session = useSession();
 
   const [page, setPage] = useState(1);
@@ -14,10 +14,10 @@ function StudentList() {
   const [leave, setLeave] = useState({});
 
   useEffect(() => {
-    if (session.status === "authenticated") getStudents();
+    if (session.status === "authenticated") getLeaves();
   }, [page, session]);
 
-  async function getStudents() {
+  async function getLeaves() {
     if (session.data && session.data.user.user) {
       const hostel = await session.data.user.user.hostel;
       if (session.data.user.token) {
@@ -31,15 +31,32 @@ function StudentList() {
         });
 
         if (!response.ok) {
-          console.log("Error");
         } else {
           const data = await response.json();
           setPages(data.pages);
           setLeaves(data.leaves);
-          console.log(data);
         }
       }
     }
+  }
+
+  async function updateLeave(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formEntries = new FormData(form);
+    const formObj = Object.fromEntries(formEntries);
+    const reqObj = { id: leave.id, status: formObj.status };
+
+    const res = fetch("/api/v1/leave/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: session.data.user.token,
+      },
+      body: JSON.stringify(reqObj),
+    });
+    getLeaves();
+    closeModal();
   }
 
   function closeModal() {
@@ -49,15 +66,58 @@ function StudentList() {
   return (
     <div className={`${styles.cont}`}>
       <Modal isOpen={showModal} onClose={closeModal}>
-        <h1>Leave</h1>
-        <h2>{leave.applicant}</h2>
-        <h2>{leave.reason}</h2>
-        <h2>{leave.startdate}</h2>
-        <h2>{leave.enddate}</h2>
-        <form>
-          <input type="text" />
-          <button type="submit"></button>
-        </form>
+        <div className={`${styles.modalCont}`}>
+          <h1 className={`${styles.formHead}`}>Leave</h1>
+          <form className={`${styles.form}`} onSubmit={updateLeave}>
+            <div className={`${styles.inputDiv}`}>
+              <label className={`${styles.label}`}>Applicant</label>
+              <input
+                type="text"
+                className={`${styles.input}`}
+                value={leave.applicant}
+                readOnly
+              />
+            </div>
+            <div className={`${styles.inputDiv}`}>
+              <label className={`${styles.label}`}>Reason</label>
+              <input
+                type="text"
+                className={`${styles.input}`}
+                value={leave.reason}
+                readOnly
+              />
+            </div>
+            <div className={`${styles.inputDiv}`}>
+              <label className={`${styles.label}`}>From</label>
+              <input
+                type="text"
+                className={`${styles.input}`}
+                value={leave.startdate}
+                readOnly
+              />
+            </div>
+            <div className={`${styles.inputDiv}`}>
+              <label className={`${styles.label}`}>To</label>
+              <input
+                type="text"
+                className={`${styles.input}`}
+                value={leave.enddate}
+                readOnly
+              />
+            </div>
+            <div className={`${styles.inputDiv}`}>
+              <label className={`${styles.label}`}>Status</label>
+              <select className={`${styles.input}`} name="status">
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approve</option>
+                <option value="Rejected">Reject</option>
+              </select>
+            </div>
+            <button type="submit" className={`${styles.button}`}>
+              Update Status
+            </button>
+          </form>
+        </div>
       </Modal>
       <table className={`${styles.list}`}>
         <thead>
@@ -69,27 +129,26 @@ function StudentList() {
             <th className={`${styles.head}`}>To</th>
           </tr>
         </thead>
-        {/* <tbody> */}
-        {leaves.map((item) => {
-          console.log(item);
-          return (
-            <tr
-              key={item.id}
-              className={`${styles.item}`}
-              onClick={() => {
-                setLeave(item);
-                setShowModal(true);
-              }}
-            >
-              <td>{item.applicant}</td>
-              <td>{item.rollno}</td>
-              <td>{item.reason}</td>
-              <td>{item.startdate}</td>
-              <td>{item.enddate}</td>
-            </tr>
-          );
-        })}
-        {/* </tbody> */}
+        <tbody>
+          {leaves.map((item) => {
+            return (
+              <tr
+                key={item.id}
+                className={`${styles.item}`}
+                onClick={() => {
+                  setLeave(item);
+                  setShowModal(true);
+                }}
+              >
+                <td>{item.applicant}</td>
+                <td>{item.rollno}</td>
+                <td>{item.reason}</td>
+                <td>{item.startdate}</td>
+                <td>{item.enddate}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
       <div className={`${styles.btns}`}>
         <button
@@ -115,4 +174,4 @@ function StudentList() {
   );
 }
 
-export default StudentList;
+export default LeaveList;
