@@ -32,9 +32,15 @@ export default async function handler(req, res) {
 
     const [students] = await connection.execute(query);
 
+    const [count] = await connection.execute(
+      `SELECT COUNT(*) as count FROM students WHERE hostel = "${hostel}" AND active = 1;`
+    );
+
     await connection.end();
 
-    res.status(200).json({ students });
+    const pages = Math.ceil(count[0].count / rows);
+
+    res.status(200).json({ students, pages });
   } catch (error) {
     console.error("MySQL error:", error);
     res.status(500).json({ message: "Internal Server Error" });
