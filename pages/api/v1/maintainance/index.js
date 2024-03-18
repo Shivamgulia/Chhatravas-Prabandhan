@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import mysql from 'mysql2/promise';
+import mysql from "mysql2/promise";
 
-import verifyToken from '@/components/jwt/verifyToken';
-import dbConfig from '@/assets/database/db';
+import verifyToken from "@/components/jwt/verifyToken";
+import dbConfig from "@/assets/database/db";
 
 export default async function handler(req, res) {
   const token = req.headers.authorization;
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   const decodedToken = verifyToken(token);
 
   if (!decodedToken) {
-    return res.status(401).json({ message: 'Unauthorized - Invalid token' });
+    return res.status(401).json({ message: "Unauthorized - Invalid token" });
   }
 
   const rows = 10;
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   const offset = (page - 1) * rows;
 
   if (!hostel) {
-    return res.status(400).json({ message: 'Hostel parameter is required' });
+    return res.status(400).json({ message: "Hostel parameter is required" });
   }
 
   try {
@@ -32,11 +32,17 @@ export default async function handler(req, res) {
 
     const [maintainance] = await connection.execute(query);
 
+    const [count] = await connection.execute(
+      `SELECT COUNT(*) AS count FROM maintenance_issues WHERE hostel = "${hostel}" AND status = 1;`
+    );
+
     await connection.end();
 
-    res.status(200).json({ maintainance });
+    const pages = Math.ceil(count[0].count / rows);
+
+    res.status(200).json({ maintainance, pages });
   } catch (error) {
-    console.error('MySQL error:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("MySQL error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
