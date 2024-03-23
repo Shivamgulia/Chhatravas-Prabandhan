@@ -12,6 +12,11 @@ function leave() {
   useEffect(() => {
     if (session.status === "unauthenticated") {
       router.push("/login");
+    } else if (
+      session.status === "authenticated" &&
+      !session.data.user.user.hostel
+    ) {
+      router.push("/profile");
     }
   }, [session.status]);
   return (

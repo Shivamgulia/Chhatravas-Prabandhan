@@ -1,6 +1,10 @@
-/* styles.module.css */
+.cont {
+  display: grid;
+  grid-template-columns: 85vw;
+  place-items: center;
+}
 
-.formDiv {
+.form {
   display: grid;
   place-items: center;
   gap: 2rem;
@@ -8,7 +12,14 @@
   color: black;
 }
 
+.inputDiv {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 .input {
+  display: none;
   margin-right: 10px;
   padding: 8px;
   border: 1px solid #ccc;

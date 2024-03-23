@@ -12,6 +12,12 @@ function leave() {
     console.log(session.data?.user);
     if (session.status === "unauthenticated") {
       router.push("/login");
+    } else if (
+      session.status === "authenticated" &&
+      !session.data.user.user.hostel &&
+      session.data.user.user.rollno != 0
+    ) {
+      router.push("/profile");
     }
   }, [session]);
   return (

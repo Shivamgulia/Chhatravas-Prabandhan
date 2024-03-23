@@ -77,14 +77,18 @@
 
 // export default FileUploadForm;
 
-import React, { useState, useRef } from 'react';
-import styles from '../../../styles/main/Warden/FileUploadForm.module.css';
-import { useSession } from 'next-auth/react';
+import React, { useState, useRef } from "react";
+import { useSession } from "next-auth/react";
+import * as XLSX from "xlsx";
+
+import styles from "../../../styles/main/Warden/FileUploadForm.module.css";
 
 const UploadForm = () => {
   const session = useSession();
   const [selectedFile, setSelectedFile] = useState(null);
   const [isValid, setIsValid] = useState(true);
+  const [stdList, setStdList] = useState(null);
+  const [loading, setLoading] = useState(false);
   const uploadRef = useRef();
 
   const fileChangeHandler = (event) => {
@@ -94,6 +98,20 @@ const UploadForm = () => {
     if (isValidFile) {
       setSelectedFile(file);
       setIsValid(true);
+
+      console.log("checking");
+
+      const reader = new FileReader();
+      reader.readAsBinaryString(event.target.files[0]);
+      reader.onload = (e) => {
+        const data = e.target.result;
+        const workbook = XLSX.read(data, { type: "binary" });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const parsedData = XLSX.utils.sheet_to_json(sheet);
+
+        setStdList(parsedData);
+      };
     } else {
       setSelectedFile(null);
 
@@ -103,8 +121,8 @@ const UploadForm = () => {
 
   const checkMimeType = (file) => {
     const allowedTypes = [
-      'application/vnd.ms-excel',
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ];
     if (allowedTypes.includes(file.type)) {
       return true;
@@ -113,73 +131,60 @@ const UploadForm = () => {
     }
   };
 
-  async function uploadFileHandler(file) {
-    const res = await fetch('/api/v1/student/hostelupload', {
-      method: 'POST',
-      body: JSON.stringify({ file }),
+  async function uploadFileHandler() {
+    const res = await fetch("/api/v1/student/hostelupload", {
+      method: "POST",
+      body: JSON.stringify(stdList),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         authorization: `Bearer ${session.data.user.token}`,
       },
     });
     const data = await res.json();
     if (!res.ok) {
-      console.log(data.message || 'Something went wrong!');
+      console.log(data.message || "Something went wrong!");
       return;
     }
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-
-    let base64String = '';
-    let file = document.querySelector('input[type=file]')['files'][0];
-
-    let reader = new FileReader();
-
-    reader.onload = async function () {
-      base64String = await reader.result
-        .replace('data:', '')
-        .replace(/^.+,/, '');
-
-      await uploadFileHandler(base64String);
-    };
-    reader.readAsDataURL(file);
-    if (!selectedFile) {
-      return;
-    }
+    setLoading(true);
+    await uploadFileHandler();
+    setLoading(false);
   };
 
   return (
     <div className={styles.cont}>
       <form onSubmit={submitHandler} className={styles.form}>
         {!isValid && (
-          <p style={{ color: 'red' }}>
+          <p style={{ color: "red" }}>
             Please select a valid image file (JPEG/JPG/PNG).
           </p>
         )}
 
         <input
-          type='file'
-          id='uploadButton'
+          type="file"
+          id="uploadButton"
           ref={uploadRef}
           onChange={fileChangeHandler}
           className={styles.input}
         />
-        <div>
+        <div className={`${styles.inputDiv}`}>
           <button
             className={styles.button}
-            type='button'
+            type="button"
             onClick={() => {
-              document.getElementById('uploadButton').click();
+              document.getElementById("uploadButton").click();
             }}
           >
             Select
           </button>
+          {selectedFile && <h3>{selectedFile.name}</h3>}
         </div>
         <div>
           <button
-            type='submit'
+            type="submit"
             disabled={!isValid || !selectedFile}
             className={styles.button}
           >
