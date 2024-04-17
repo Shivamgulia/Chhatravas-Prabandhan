@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    const query = `SELECT * FROM \`leave\` WHERE hostel = "${hostel}" AND rollno = ${rollno} AND status = "Pending" ORDER BY id DESC ;`;
+    const query = `SELECT * FROM \`leave\` WHERE hostel = "${hostel}" AND rollno = ${rollno} ORDER BY id DESC ;`;
 
     const [leaves] = await connection.execute(query);
 
