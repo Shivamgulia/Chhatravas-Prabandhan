@@ -139,8 +139,10 @@ const NoticeBoard = () => {
         <div className={`${styles.emergency}`}>
           <h2 className={`${styles.emergencyhead}`}>Emergency Numbers</h2>
           <ul className={`${styles.emergencylist}`}>
-            <li className={`${styles.emergencyitem}`}>Police: {100}</li>
-            <li className={`${styles.emergencyitem}`}>Ambulance: {102}</li>
+            <li className={`${styles.emergencyitem}`}>Police: {112}</li>
+            <li className={`${styles.emergencyitem}`}>
+              HBTU Ambulance: {8400366259}
+            </li>
           </ul>
         </div>
       </div>
